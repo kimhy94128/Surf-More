@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   db.query(`select * from items ORDER BY added DESC;`, (err, rows) => {
     console.log('에러', err);
     console.log(rows);
-    res.render('shop', {rows: rows});
+    res.render('shop', {rows: rows, category: '', second: ''});
   })
 });
 
@@ -15,7 +15,7 @@ router.get('/:category', (req, res) => {
   const category = req.params.category;
   const sql = `SELECT * FROM items LEFT JOIN category ON items.category = category.no WHERE category.name_eng = ? ORDER BY added DESC;`
   db.query(sql, [category], (err, rows) => {
-    res.render('shop', {rows: rows});
+    res.render('shop', {rows: rows, category: category, second: ''});
   })
 })
 
@@ -24,7 +24,7 @@ router.get('/:category/:second', (req, res) => {
   const second = req.params.second;
   const sql = `SELECT * FROM items LEFT JOIN category ON items.category = category.no LEFT JOIN second_cate ON items.second_cate = second_cate.no WHERE category.name_eng = ? AND second_cate.cate_name = ? ORDER BY added DESC;`
   db.query(sql, [category, second], (err, rows) => {
-    res.render('shop', {rows: rows});
+    res.render('shop', {rows: rows, category: category, second: second});
   })
 })
 

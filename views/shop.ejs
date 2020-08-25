@@ -11,8 +11,12 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/shop">Shop</a></li>
-            <li class="breadcrumb-item"><a href="#"></a></li>
-            <li class="breadcrumb-item active" aria-current="page">Boxed</li>
+            <% if(category !== ''){ %>
+              <li class="breadcrumb-item"><a href="/shop/<%= category %>"><%= category %></a></li>
+            <% } %>
+            <% if(second !== ''){ %>
+              <li class="breadcrumb-item"><%= second %></li>
+            <% } %>
         </ol>
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
